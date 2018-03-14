@@ -6,12 +6,12 @@
   <id name="Id">
     <generator class="identity"></generator>
   </id>
-    <property name="Nome"></property>
-    <property name="Endereco"></property>
-    <property name="TelefoneCliente"></property>
+  <property name="Nome"></property>
+  <property name="Telefone"></property>
+  <property name="Endereco"></property>
+  <property name="LimiteDeCredito"></property>
     <property name="Filiacao"></property>
     <property name="Status"></property>
-    <property name="LimiteDeCredito"></property>
     <property name="TipoDeCliente"></property>
 </class>
 </hibernate-mapping>

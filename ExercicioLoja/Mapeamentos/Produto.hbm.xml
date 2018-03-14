@@ -6,13 +6,11 @@
     <id name="Id">
       <generator class="identity"></generator>
     </id>
-    <property name="Nome"></property>
-    <bag name="Produtos" fetch="join">
-      <key column="CategoriaId"></key>
-      <one-to-many class="Produto"></one-to-many>
-    </bag>
-    <property name="DataDeFabricacao"></property>
-    <property name="DataDeValidade"></property>
-    <property name="Preco"></property>
+      <property name="Nome"></property>
+      <property name="Preco"></property>
+      <many-to-one name="Categoria" column="CategoriaId"></many-to-one>
+      <property name="DataDeFabricacao"></property>
+      <property name="DataDeValidade"></property>
+      <many-to-one name="Fornecedor" column="FornecedorId"></many-to-one>
   </class>
-</hibernate-mapping>
+  </hibernate-mapping>

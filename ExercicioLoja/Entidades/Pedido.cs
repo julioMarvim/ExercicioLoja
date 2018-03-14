@@ -13,6 +13,6 @@ namespace ExercicioLoja.Entidades
         public virtual int QuantidadeDeProdutos { get; set; }
         public virtual int ValorTotal { get; set; }
         public virtual Cliente Cliente { get; set; } 
-        public virtual IList<Produto> Produtos { get; set; }
+        public virtual IList<Produto> Produtos  { get; set; }
     }
 }

@@ -60,7 +60,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entidades\Categoria.cs" />
     <Compile Include="Entidades\Cliente.cs" />
+    <Compile Include="Entidades\Fornecedor.cs" />
     <Compile Include="Entidades\Pedido.cs" />
     <Compile Include="Entidades\Produto.cs" />
     <Compile Include="Infra\NHibernateHelper.cs" />
@@ -78,8 +80,9 @@
     <Content Include="hibernate.cfg.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Mapeamentos\Produto.hbm.xml" />
-    <EmbeddedResource Include="Mapeamentos\Pedido.hbm.xml" />
+    <EmbeddedResource Include="Mapeamentos\Fornecedor.hbm.xml" />
+    <EmbeddedResource Include="Mapeamentos\Produto.hbm.xml" />
+    <EmbeddedResource Include="Mapeamentos\Categoria.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

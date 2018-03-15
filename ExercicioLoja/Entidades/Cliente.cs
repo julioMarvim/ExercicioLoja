@@ -20,8 +20,14 @@ namespace ExercicioLoja.Entidades
         public virtual decimal LimiteDeCredito { get; set; }
         public virtual string Documento { get; set; }
 
-       
+        public virtual IList<Produto> IncluirProdutoNoPedido( string produto)
+        {
+            ISession session = NHibernateHelper.AbreSession();
+            ProdutoDAO produtoDAO = new ProdutoDAO(session);
 
+            var produtoEscolhido = produtoDAO.BuscaProdutos(produto,0,"");
 
+            return produtoEscolhido;
+        }
     }
 }

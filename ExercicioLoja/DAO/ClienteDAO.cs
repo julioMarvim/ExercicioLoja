@@ -18,13 +18,12 @@ namespace ExercicioLoja.DAO
             this.session = session;
         }
 
+
+        //Adicionar Novo Cliente
         public void Adiciona(string nome, string telefone, string endereco, string filiacao,  string documento)
         {
- 
-
             ITransaction transacao = session.BeginTransaction();
             
-
             Cliente cliente = new Cliente();
             cliente.Nome = nome;
             cliente.Telefone = telefone;
@@ -38,6 +37,9 @@ namespace ExercicioLoja.DAO
             transacao.Commit();
         }
 
+        
+
+        //Buscar Cliente Por Id
         public Cliente BuscaPorId(int id)
         {
             return session.Get<Cliente>(id);

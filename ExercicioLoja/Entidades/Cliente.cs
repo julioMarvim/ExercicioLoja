@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ExercicioLoja.DAO;
+using ExercicioLoja.Infra;
+using NHibernate;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +19,9 @@ namespace ExercicioLoja.Entidades
         public virtual string Status { get; set; }
         public virtual decimal LimiteDeCredito { get; set; }
         public virtual string Documento { get; set; }
+
+       
+
 
     }
 }

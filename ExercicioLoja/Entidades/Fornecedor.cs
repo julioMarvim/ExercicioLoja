@@ -12,7 +12,7 @@ namespace ExercicioLoja.Entidades
         public virtual string Nome { get; set; }                
         public virtual string Telefone { get; set; }
         public virtual string Endereco { get; set; }
-        public virtual int CNPJ { get; set; }
+        public virtual string CNPJ { get; set; }
         public virtual IList<Produto> Produtos { get; set; }
     }
 }

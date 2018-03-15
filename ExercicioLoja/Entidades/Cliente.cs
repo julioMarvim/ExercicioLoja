@@ -13,9 +13,9 @@ namespace ExercicioLoja.Entidades
         public virtual string Endereco { get; set; }
         public virtual string Telefone { get; set; }
         public virtual string Filiacao { get; set; }
-        public virtual int Status { get; set; }
+        public virtual string Status { get; set; }
         public virtual decimal LimiteDeCredito { get; set; }
-        public virtual string TipoDeCliente { get; set; }
+        public virtual string Documento { get; set; }
 
     }
 }

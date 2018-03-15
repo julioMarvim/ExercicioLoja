@@ -12,6 +12,6 @@
   <property name="LimiteDeCredito"></property>
     <property name="Filiacao"></property>
     <property name="Status"></property>
-    <property name="TipoDeCliente"></property>
+    <property name="Documento"></property>
 </class>
 </hibernate-mapping>

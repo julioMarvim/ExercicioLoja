@@ -62,14 +62,6 @@ namespace ExercicioLoja.DAO
         public IList<Produto> TodosOsProdutos()
         {
             var ListaDeProdutos = this.BuscaProdutos("", 0, "");
-
-            foreach (var buscarProduto in ListaDeProdutos)
-            {
-                Console.WriteLine("Nome: {0} Preco: R${1} Categoria: {2}",
-                    buscarProduto.Nome.PadRight(20),
-                    buscarProduto.Preco.ToString().PadRight(20),
-                    buscarProduto.Categoria.Nome);                   
-            }
             return ListaDeProdutos;
         }
 

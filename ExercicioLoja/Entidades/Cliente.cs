@@ -20,14 +20,39 @@ namespace ExercicioLoja.Entidades
         public virtual decimal LimiteDeCredito { get; set; }
         public virtual string Documento { get; set; }
 
-        public virtual IList<Produto> IncluirProdutoNoPedido( string produto)
+
+
+        //public virtual IList<Produto> IncluirProdutoNoPedido(List<Produto> produtoEscolhido)
+        //{
+        //    ISession session = NHibernateHelper.AbreSession();
+        //    ProdutoDAO produtoDAO = new ProdutoDAO(session);
+
+        //    var produtoEscolhido = produtoDAO.BuscaProdutos(produto, 0, "");
+
+        //    return produtoEscolhido;
+        //}
+
+        //definição de uma consulta
+        public virtual IList<Produto> ConsultaProdutos()
         {
             ISession session = NHibernateHelper.AbreSession();
             ProdutoDAO produtoDAO = new ProdutoDAO(session);
 
-            var produtoEscolhido = produtoDAO.BuscaProdutos(produto,0,"");
+            Console.WriteLine("Pesquise o Produto Desejado: ");
+            var textoBusca = Console.ReadLine();
+            //Consulta 
+            var produtos = from a in produtoDAO.TodosOsProdutos()
+                           where a.Nome.Contains(textoBusca)
+                           select a;
+            //Impressão
+            foreach (var produto in produtos)
+            {
+                Console.WriteLine("{0}\t{1}\t{2}", produto.Nome, produto.Preco, produto.Categoria.Nome);
+            }
+            Console.ReadKey();
 
-            return produtoEscolhido;
+            return null;
         }
+       
     }
 }

@@ -16,6 +16,7 @@ namespace ExercicioLoja
         {
             ISession session = NHibernateHelper.AbreSession();
             ClienteDAO clienteDAO = new ClienteDAO(session);
+			
             CategoriaDAO categoriaDAO = new CategoriaDAO(session);
             ProdutoDAO produtoDAO = new ProdutoDAO(session);
             FornecedorDAO fornecedorDAO = new FornecedorDAO(session);

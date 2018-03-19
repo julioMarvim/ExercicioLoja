@@ -19,6 +19,7 @@ namespace ExercicioLoja
 			
             CategoriaDAO categoriaDAO = new CategoriaDAO(session);
             ProdutoDAO produtoDAO = new ProdutoDAO(session);
+			
             FornecedorDAO fornecedorDAO = new FornecedorDAO(session);
             PedidoDAO pedidoDAO = new PedidoDAO(session);
             Cliente cliente = new Cliente();

@@ -33,7 +33,7 @@ namespace ExercicioLoja.Entidades
         //}
 
         //definição de uma consulta
-        public virtual IList<Produto> ConsultaProdutos()
+        public virtual IList<Produto> ConsultaProdutoPorNome()
         {
             ISession session = NHibernateHelper.AbreSession();
             ProdutoDAO produtoDAO = new ProdutoDAO(session);
@@ -53,6 +53,8 @@ namespace ExercicioLoja.Entidades
 
             return null;
         }
+
+
        
     }
 }

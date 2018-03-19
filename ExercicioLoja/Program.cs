@@ -22,6 +22,10 @@ namespace ExercicioLoja
             PedidoDAO pedidoDAO = new PedidoDAO(session);
             Cliente cliente = new Cliente();
 
+
+            ReconhecerCliente();
+            CriarPedido();
+
             //NHibernateHelper.GeraSchema();
             //fornecedorDAO.Adiciona("Ibanez Guitar", "(31)99876-5432", "Rua da Guitarra - 1000", "99.999.999/9999-99");
             //clienteDAO.Adiciona("Julio Marvim", "(31)97335-9094", "Rua São Gotardo - 129", "Delmira Pego|Venceslau Aparecido", "114.377.886-37");
@@ -33,29 +37,36 @@ namespace ExercicioLoja
             //pedidoDAO.Adiciona(5500, 1);
 
             // Listar Todos Os Produtos. 
-            var todosOsProdutos = produtoDAO.TodosOsProdutos();
-            foreach (var produtos in todosOsProdutos)
-            {
-                Console.WriteLine("ID: {0}\t Nome: {1}\t Peço: {2}", produtos.Id, produtos.Nome.PadRight(20), produtos.Preco);
-            }
+            //var todosOsProdutos = produtoDAO.TodosOsProdutos();
+            //foreach (var produtos in todosOsProdutos)
+            //{
+            //    Console.WriteLine("ID: {0}\t Nome: {1}\t Peço: {2}", produtos.Id, produtos.Nome.PadRight(20), produtos.Preco);
+            //}
 
             //Escolhendo os Produtos.
 
-          
-            Console.WriteLine("Para Incluir mais produtos digite 1, para Fechar Pedido digite 2: ");
-            var produtoEscolhido = Convert.ToInt16(Console.ReadLine());
 
-            while (produtoEscolhido ==1 )
-            {
-                Console.WriteLine("Escolha os Produtos Desejados Informando seu ID: ");
-                var item = Console.ReadLine();
-                var itemPedido = produtoDAO.BuscaPorId(Convert.ToInt16(item));
-                List<Produto> listaDeProdutos = new List<Produto>();
-                listaDeProdutos.Add(itemPedido);
-                //var itemPedido = produtoDAO.BuscaPorId(Convert.ToInt16(produtoEscolhido));
-            }
+            //Console.WriteLine("Para Incluir produtos no carrinho digite digite 1, para Fechar Pedido digite 2: ");
+            //var produtoEscolhido = Convert.ToInt16(Console.ReadLine());
 
-            Console.WriteLine();
+            //while (produtoEscolhido ==1 )
+            //{
+            //Console.WriteLine("Escolha os Produtos Desejados Informando seu ID: ");
+            //var item = Console.ReadLine();
+            //var itemPedido = produtoDAO.BuscaPorId(Convert.ToInt16(item));
+            //    List<Produto> listaDeProdutos = new List<Produto>();
+            //    listaDeProdutos.Add(itemPedido);
+
+            //    foreach (var itemEscolhido in listaDeProdutos)
+            //    {
+            //        Console.WriteLine("{0}\t{1}", itemEscolhido.Nome, itemEscolhido.Preco);
+            //    }
+
+
+            //    //var itemPedido = produtoDAO.BuscaPorId(Convert.ToInt16(produtoEscolhido));
+            //}
+
+            //Console.WriteLine();
 
 
 
@@ -77,9 +88,9 @@ namespace ExercicioLoja
             //    listaDeProdutos.Add(itemPedido);
             //    listaDeProdutos.Add(novaOpcao);
 
-            //    foreach (var item in listaDeProdutos)
+            //    foreach (var produto in listaDeProdutos)
             //    {
-            //        Console.WriteLine("ID: {0}\t Nome: {1}\t Peço: {2}", item.Id, item.Nome.PadRight(20), item.Preco);
+            //        Console.WriteLine("ID: {0}\t Nome: {1}\t Peço: {2}", produto.Id, produto.Nome.PadRight(20), produto.Preco);
             //    }
             //    Console.WriteLine(listaDeProdutos);
             //}
@@ -89,22 +100,84 @@ namespace ExercicioLoja
             //    listaDeProdutos.Add(itemPedido);
             //    pedidoDAO.Adiciona(itemPedido.Preco, listaDeProdutos, 1);
             //    Console.WriteLine("--------------------COMPRA REALIZADA COM SUCESSO--------------------------");
-            //} else
+            //}
+            //else
             //{
 
             //    Console.WriteLine("Digite um valor Valido");
             //}
 
+            Console.WriteLine("-----------------OLÁ É UM PRAZER TE-LO EM NOSSA LOJA --------------------");
+            Console.WriteLine("Se ja for cadastrado digite 1, se não for digite 2 para se cadastrar: ");
+            var opcao = Console.ReadLine();
 
-            //Adicionando Produto no Pedido.
+            Console.WriteLine("Informe Seu Nome:");
+            var nome = Console.ReadLine();
+            Console.WriteLine("Informe Seu Telefone:");
+            var telefone = Console.ReadLine();
+            Console.WriteLine("Informe Seu Endereço:");
+            var endereco = Console.ReadLine();
+            Console.WriteLine("Informe o nome da Sua Mãe:");
+            var mae = Console.ReadLine();
+            Console.WriteLine("Informe o nome do Seu Pai:");
+            var pai = Console.ReadLine();
+            
+            Console.WriteLine("Informe Seu CPF ou CNPJ:");
+            var documento = Console.ReadLine();
 
-            //pedidoDAO.Adiciona(itemPedido.Preco, listaDeProdutos, 1);
+            //Console.ReadKey();
 
-            //var pesquisa = cliente.ConsultaProdutos();
+        }
 
-            //Console.WriteLine(pesquisa);
+        public static Cliente ReconhecerCliente(string nome, string telefone, string endereco, string mae, string pai, string documento, string opcao)
+        {
+            ISession session = NHibernateHelper.AbreSession();
+            ClienteDAO clienteDAO = new ClienteDAO(session);
+            Cliente cliente = new Cliente();
 
-            Console.ReadKey();
+            if(opcao == "1")
+            {
+                clienteDAO.BuscaPorNome(opcao);
+            }else if (opcao == "2")
+            {
+                cliente.Nome = nome;
+                cliente.Telefone = telefone;
+                cliente.Endereco = endereco;
+                var filiacao = pai + "|" + mae;
+                cliente.Documento = documento;
+                clienteDAO.Adiciona(nome, telefone, endereco, filiacao, documento);
+            }
+            else
+            {
+                Console.WriteLine("Favor Informar um valor valido!");
+            }
+        }
+
+        public static void CriarPedido()
+        {
+            ISession session = NHibernateHelper.AbreSession();
+            ProdutoDAO produtoDAO = new ProdutoDAO(session);
+            PedidoDAO pedidoDAO = new PedidoDAO(session);
+
+            Console.WriteLine("Para Incluir produtos no carrinho digite digite 1, para Fechar Pedido digite 2: ");
+            var produtoEscolhido = Convert.ToInt16(Console.ReadLine());
+
+            while (produtoEscolhido == 1)
+            {
+                Console.WriteLine("Escolha os Produtos Desejados Informando seu ID: ");
+                var item = Console.ReadLine();
+                var itemPedido = produtoDAO.BuscaPorId(Convert.ToInt16(item));
+                List<Produto> listaDeProdutos = new List<Produto>();
+                listaDeProdutos.Add(itemPedido);
+
+                foreach (var itemEscolhido in listaDeProdutos)
+                {
+                    Console.WriteLine("{0}\t{1}", itemEscolhido.Nome, itemEscolhido.Preco);
+                   
+                }
+            }
+
+           
 
         }
     }

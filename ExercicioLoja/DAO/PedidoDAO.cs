@@ -19,7 +19,7 @@ namespace ExercicioLoja.DAO
 
         //INCLUIR LISTA DE PRODUTOS NO METODO - 
 
-        public void Adiciona(decimal valorTotal, List<Produto> produtos, int idCliente)
+        public void Adiciona(List<Produto> valorTotal, List<Produto> produtos, int idCliente)
         {
             ITransaction transacao = session.BeginTransaction();
 

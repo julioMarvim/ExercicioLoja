@@ -137,7 +137,7 @@ namespace ExercicioLoja
 
             if(opcao == "1")
             {
-                clienteDAO.BuscaPorNome(opcao);
+                clienteDAO.BuscaPorNome(nome);
             }else if (opcao == "2")
             {
                 cliente.Nome = nome;

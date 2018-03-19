@@ -65,22 +65,38 @@ namespace ExercicioLoja.DAO
 
         //}
 
-        public Cliente BuscaPorNome(string nome)
-        {
-            ISession session = NHibernateHelper.AbreSession();
-            ClienteDAO clienteDAO = new ClienteDAO(session);
-            Console.WriteLine("Informe seu nome para que possamos identifica-lo");
-            var encontrarCliente = Console.ReadLine();
 
-            String hql = "from Cliente p where p.Nome = : nome";
-            IQuery query = session.CreateQuery(hql);
-            query.SetParameter("nome", encontrarCliente);
-            IList<Cliente> clientes = query.List<Cliente>();
-            foreach (Cliente cliente in clientes)
-            {
-                Console.WriteLine("Olá, {0}", cliente.Nome, "Bem vindo!");
-            }
-            return null;
+
+        //public Cliente BuscaPorNome(string nome)
+        //{
+        //    ISession session = NHibernateHelper.AbreSession();
+        //    ClienteDAO clienteDAO = new ClienteDAO(session);
+        //    Console.WriteLine("Informe seu nome para que possamos identifica-lo");
+        //    var encontrarCliente = Console.ReadLine();
+
+        //    String hql = "from Cliente p where p.Nome = : nome";
+        //    IQuery query = session.CreateQuery(hql);
+        //    query.SetParameter("nome", encontrarCliente);
+        //    IList<Cliente> clientes = query.List<Cliente>();
+        //    foreach (Cliente cliente in clientes)
+        //    {
+        //        Console.WriteLine("Olá, {0}", cliente.Nome, "Bem vindo!");
+        //    }
+        //    return null;
+        //}
+
+        public List<Cliente> BuscaPorNome(string nome)
+        {
+            ICriteria criteria = session.CreateCriteria<Cliente>();
+            if (!String.IsNullOrEmpty(nome))
+                criteria.Add(Restrictions.Eq("NomeCliente", nome));
+            else
+                return null;
+            var listaDeClientes = criteria.List<Cliente>();
+            if (listaDeClientes.Count() > 0)
+                return listaDeClientes.ToList();
+            else
+                return null;
         }
     }
 

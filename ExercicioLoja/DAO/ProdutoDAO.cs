@@ -11,9 +11,9 @@ namespace ExercicioLoja.DAO
 {
     public class ProdutoDAO
     {
-        private ISession session;
+       private ISession session;
 
-        public ProdutoDAO(ISession session)
+        static public ProdutoDAO(ISession session)
         {
             this.session = session;
         }
@@ -61,7 +61,12 @@ namespace ExercicioLoja.DAO
         //Listar Todos os Produtos Cadastrados
         public IList<Produto> TodosOsProdutos()
         {
+            Console.WriteLine("-------------------ESCOLHA OS PRODUTOS QUE DESEJA ----------------------");
             var ListaDeProdutos = this.BuscaProdutos("", 0, "");
+            foreach (var produtos in ListaDeProdutos)
+            {
+                Console.WriteLine("ID: {0}\t Nome: {1}\t Peço: {2}", produtos.Id, produtos.Nome.PadRight(20), produtos.Preco);
+            }
             return ListaDeProdutos;
         }
 

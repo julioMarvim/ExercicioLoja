@@ -19,7 +19,7 @@ namespace ExercicioLoja.DAO
 
         //INCLUIR LISTA DE PRODUTOS NO METODO - 
 
-        public void Adiciona(decimal valorTotal, List<Produto> produtos, int idCliente)
+        public void Adiciona(decimal valorTotal, List<Produto> produtos, Cliente clienteId)
         {
             ITransaction transacao = session.BeginTransaction();
 
@@ -30,7 +30,7 @@ namespace ExercicioLoja.DAO
             pedido.DataDoPedido = DateTime.Now;
             pedido.Produtos = produtos;
             pedido.ValorTotal = valorTotal;
-            pedido.Cliente = buscarCliente.BuscaPorId(Convert.ToInt32(idCliente));
+            pedido.Cliente = buscarCliente.BuscaPorId(Convert.ToInt32(clienteId));
 
             session.Save(pedido);
             transacao.Commit();

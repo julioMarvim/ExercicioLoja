@@ -89,7 +89,7 @@ namespace ExercicioLoja.DAO
         {
             ICriteria criteria = session.CreateCriteria<Cliente>();
             if (!String.IsNullOrEmpty(nome))
-                criteria.Add(Restrictions.Eq("NomeCliente", nome));
+                criteria.Add(Restrictions.Eq("Nome", nome));
             else
                 return null;
             var listaDeClientes = criteria.List<Cliente>();

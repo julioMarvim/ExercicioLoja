@@ -16,17 +16,16 @@ namespace ExercicioLoja
         {
             ISession session = NHibernateHelper.AbreSession();
             ClienteDAO clienteDAO = new ClienteDAO(session);
-			
             CategoriaDAO categoriaDAO = new CategoriaDAO(session);
             ProdutoDAO produtoDAO = new ProdutoDAO(session);
-			
             FornecedorDAO fornecedorDAO = new FornecedorDAO(session);
             PedidoDAO pedidoDAO = new PedidoDAO(session);
             Cliente cliente = new Cliente();
 
-
+            Console.WriteLine("-----------------OLÁ É UM PRAZER TE-LO EM NOSSA LOJA --------------------");
             ReconhecerCliente();
             CriarPedido();
+            //CriarPedido();
 
             //NHibernateHelper.GeraSchema();
             //fornecedorDAO.Adiciona("Ibanez Guitar", "(31)99876-5432", "Rua da Guitarra - 1000", "99.999.999/9999-99");
@@ -109,51 +108,57 @@ namespace ExercicioLoja
             //    Console.WriteLine("Digite um valor Valido");
             //}
 
-            Console.WriteLine("-----------------OLÁ É UM PRAZER TE-LO EM NOSSA LOJA --------------------");
-            Console.WriteLine("Se ja for cadastrado digite 1, se não for digite 2 para se cadastrar: ");
-            var opcao = Console.ReadLine();
 
-            Console.WriteLine("Informe Seu Nome:");
-            var nome = Console.ReadLine();
-            Console.WriteLine("Informe Seu Telefone:");
-            var telefone = Console.ReadLine();
-            Console.WriteLine("Informe Seu Endereço:");
-            var endereco = Console.ReadLine();
-            Console.WriteLine("Informe o nome da Sua Mãe:");
-            var mae = Console.ReadLine();
-            Console.WriteLine("Informe o nome do Seu Pai:");
-            var pai = Console.ReadLine();
-            
-            Console.WriteLine("Informe Seu CPF ou CNPJ:");
-            var documento = Console.ReadLine();
 
-            //Console.ReadKey();
+
+            Console.ReadKey();
 
         }
 
-        public static Cliente ReconhecerCliente(string nome, string telefone, string endereco, string mae, string pai, string documento, string opcao)
+        public static Cliente ReconhecerCliente()
         {
             ISession session = NHibernateHelper.AbreSession();
             ClienteDAO clienteDAO = new ClienteDAO(session);
-            Cliente cliente = new Cliente();
+            //Cliente cliente = new Cliente();
 
-            if(opcao == "1")
+            Console.WriteLine("Se ja for cadastrado digite 1, se não for digite 2 para se cadastrar: ");
+            var opcao = Console.ReadLine();
+
+            if (opcao == "1")
             {
-                clienteDAO.BuscaPorNome(nome);
-            }else if (opcao == "2")
+                Console.WriteLine("Informe Seu Nome:");
+                var nome = Console.ReadLine();
+                var clienteCadastrardo = clienteDAO.BuscaPorNome(nome);
+                foreach (var item in clienteCadastrardo)
+                {
+                    Console.WriteLine("Bem Vindo! {0}", item.Nome);
+                }
+
+            }
+            else if (opcao == "2")
             {
-                cliente.Nome = nome;
-                cliente.Telefone = telefone;
-                cliente.Endereco = endereco;
+                Console.WriteLine("Informe Seu Nome:");
+                var nome = Console.ReadLine();
+                Console.WriteLine("Informe Seu Telefone:");
+                var telefone = Console.ReadLine();
+                Console.WriteLine("Informe Seu Endereço:");
+                var endereco = Console.ReadLine();
+                Console.WriteLine("Informe o nome da Sua Mãe:");
+                var mae = Console.ReadLine();
+                Console.WriteLine("Informe o nome do Seu Pai:");
+                var pai = Console.ReadLine();
                 var filiacao = pai + "|" + mae;
-                cliente.Documento = documento;
+                Console.WriteLine("Informe Seu CPF ou CNPJ:");
+                var documento = Console.ReadLine(); ;
                 clienteDAO.Adiciona(nome, telefone, endereco, filiacao, documento);
             }
             else
             {
                 Console.WriteLine("Favor Informar um valor valido!");
             }
+            return null;
         }
+
 
         public static void CriarPedido()
         {
@@ -175,12 +180,12 @@ namespace ExercicioLoja
                 foreach (var itemEscolhido in listaDeProdutos)
                 {
                     Console.WriteLine("{0}\t{1}", itemEscolhido.Nome, itemEscolhido.Preco);
-                   
+
                 }
+
+
+
             }
-
-           
-
         }
     }
 }

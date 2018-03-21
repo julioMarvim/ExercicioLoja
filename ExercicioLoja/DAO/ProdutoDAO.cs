@@ -13,7 +13,7 @@ namespace ExercicioLoja.DAO
     {
        private ISession session;
 
-        static public ProdutoDAO(ISession session)
+         public ProdutoDAO(ISession session)
         {
             this.session = session;
         }

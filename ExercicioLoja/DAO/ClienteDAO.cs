@@ -37,54 +37,8 @@ namespace ExercicioLoja.DAO
             session.Save(cliente);
             transacao.Commit();
         }
-
-
-
-        //Buscar Cliente Por Id
-        public Cliente BuscaPorId(int id)
-        {
-            return session.Get<Cliente>(id);
-        }
-
-        //public Cliente BuscaPorNome(string nome)
-        //{
-        //    return session.Get<Cliente>(nome);
-        //}
-
-
-        //public cliente buscapornome(string nome)
-        //{
-        //    return session.get<cliente>(nome);
-        //}
-        //public Cliente BuscaPorNome(string nome)
-        //{
-        //    Cliente cliente = new Cliente();
-        //    var ClienteNome = from a in cliente.Nome
-        //                   where a.Nome.Contains(nome)
-        //                   select a;
-
-        //}
-
-
-
-        //public Cliente BuscaPorNome(string nome)
-        //{
-        //    ISession session = NHibernateHelper.AbreSession();
-        //    ClienteDAO clienteDAO = new ClienteDAO(session);
-        //    Console.WriteLine("Informe seu nome para que possamos identifica-lo");
-        //    var encontrarCliente = Console.ReadLine();
-
-        //    String hql = "from Cliente p where p.Nome = : nome";
-        //    IQuery query = session.CreateQuery(hql);
-        //    query.SetParameter("nome", encontrarCliente);
-        //    IList<Cliente> clientes = query.List<Cliente>();
-        //    foreach (Cliente cliente in clientes)
-        //    {
-        //        Console.WriteLine("Olá, {0}", cliente.Nome, "Bem vindo!");
-        //    }
-        //    return null;
-        //}
-
+       
+        //Buscar Cliente por Nome
         public List<Cliente> BuscaPorNome(string nome)
         {
             ICriteria criteria = session.CreateCriteria<Cliente>();

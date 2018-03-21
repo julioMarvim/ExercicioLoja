@@ -55,20 +55,25 @@ namespace ExercicioLoja.DAO
                 criteriaCategoria.Add(Restrictions.Eq(nome, nomeCategoria));
             }
 
-            return criteria.List<Produto>();
+            var todosOsProdutos = criteria.List<Produto>();
+            foreach (var produtos in todosOsProdutos)
+            {
+                Console.WriteLine("ID: {0}\t{1}\tR$:{2}\tCategoria:{3}", produtos.Id, produtos.Nome.PadRight(20), produtos.Preco, produtos.Categoria.Nome);
+            }
+            return todosOsProdutos;
         }
 
         //Listar Todos os Produtos Cadastrados
-        public IList<Produto> TodosOsProdutos()
-        {
-            Console.WriteLine("-------------------ESCOLHA OS PRODUTOS QUE DESEJA ----------------------");
-            var ListaDeProdutos = this.BuscaProdutos("", 0, "");
-            foreach (var produtos in ListaDeProdutos)
-            {
-                Console.WriteLine("ID: {0}\t Nome: {1}\t Peço: {2}", produtos.Id, produtos.Nome.PadRight(20), produtos.Preco);
-            }
-            return ListaDeProdutos;
-        }
+        //public IList<Produto> TodosOsProdutos()
+        //{
+        //    Console.WriteLine("-------------------ESCOLHA OS PRODUTOS QUE DESEJA ----------------------");
+        //    var ListaDeProdutos = this.BuscaProdutos("", 0, "");
+        //    foreach (var produtos in ListaDeProdutos)
+        //    {
+        //        Console.WriteLine("ID: {0}\t Nome: {1}\t Peço: {2}", produtos.Id, produtos.Nome.PadRight(20), produtos.Preco);
+        //    }
+        //    return ListaDeProdutos;
+        //}
 
         public Produto BuscaPorId(int id)
         {

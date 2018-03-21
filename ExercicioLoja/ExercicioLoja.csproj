@@ -71,7 +71,7 @@
     <Compile Include="Entidades\Pedido.cs" />
     <Compile Include="Entidades\Produto.cs" />
     <Compile Include="Infra\NHibernateHelper.cs" />
-    <Compile Include="InterfaceUsuario.cs" />
+    <Compile Include="InterfaceCliente.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

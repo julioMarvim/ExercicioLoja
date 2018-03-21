@@ -10,6 +10,7 @@
     </id>
 
     <property name="DataDoPedido"></property>
+    <property name="QuantidadeDeProdutos"></property>
     <property name="ValorTotal"></property>
     <many-to-one name="Cliente" column="ClienteId"></many-to-one>
     <bag name="Produtos" table="Produtos_Pedido">

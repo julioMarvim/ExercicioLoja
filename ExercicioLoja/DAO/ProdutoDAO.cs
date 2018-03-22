@@ -63,21 +63,10 @@ namespace ExercicioLoja.DAO
             return todosOsProdutos;
         }
 
-        //Listar Todos os Produtos Cadastrados
-        //public IList<Produto> TodosOsProdutos()
-        //{
-        //    Console.WriteLine("-------------------ESCOLHA OS PRODUTOS QUE DESEJA ----------------------");
-        //    var ListaDeProdutos = this.BuscaProdutos("", 0, "");
-        //    foreach (var produtos in ListaDeProdutos)
-        //    {
-        //        Console.WriteLine("ID: {0}\t Nome: {1}\t Peço: {2}", produtos.Id, produtos.Nome.PadRight(20), produtos.Preco);
-        //    }
-        //    return ListaDeProdutos;
-        //}
-
         public Produto BuscaPorId(int id)
         {
             return session.Get<Produto>(id);
         }
+
     }
 }

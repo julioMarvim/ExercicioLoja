@@ -14,5 +14,7 @@ namespace ExercicioLoja.Entidades
         public virtual decimal ValorTotal { get; set; }
         public virtual Cliente Cliente { get; set; }     
         public virtual int QuantidadeDeProdutos { get; set; }
+
+        
     }
 }

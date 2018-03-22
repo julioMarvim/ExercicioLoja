@@ -35,12 +35,14 @@ namespace ExercicioLoja
 
          public static void MenuCliente(Cliente cliente)
         {
-            Console.WriteLine("         ****OLÁ "+ cliente.Nome +"!!****           ");
-            Console.WriteLine("\nDigite 1 para incluir produto no carrino\n" +
-                "Digite 2 para remover produto do carrinho\n" +
-                "Digite 3 para mostrar o valor total dos produtos selecionados\n" +
+            Console.WriteLine("-----------------------------------------------------------------------------");
+            Console.WriteLine("Codigo do Cliente: {0}\t\t\t Nome: {1}", cliente.Id, cliente.Nome);
+            Console.WriteLine("-----------------------------------------------------------------------------");
+            Console.WriteLine("\nDigite 1 para incluir produto no Carrino\n" +
+                "Digite 2 para remover produto do Carrinho\n" +
+                "Digite 3 para Consultar produtos do Pedido\n" +
                 "Digite 4 para fechar o Pedido \n" +
-                "Digite 5 para consultar o seu carrinho\n" +
+                "Digite 5 para consultar todas as suas Compras na loja\n"+
                 "Digite qualquer outro valor para encerrar");
             string opcao = Console.ReadLine();
 
@@ -52,8 +54,8 @@ namespace ExercicioLoja
                 ValorTotalDoPedido(cliente);
             else if (opcao == "4")
                 FecharPedido(cliente);
-            //else if (opcao == "5")
-            //    ConsultaPedido(cliente);
+            else if (opcao == "5")
+                ConsultarPedidosCliente(cliente);
             else
                 Console.WriteLine("Obrigado por acessar a nossa loja virtual");
         }
@@ -158,7 +160,7 @@ namespace ExercicioLoja
         public static void ListaProdutosPedido(Pedido pedido)
         {
             var listaProdutos = pedido.Produtos;
-            if (listaProdutos.Count > 0 )
+            if (listaProdutos.Count > 0)
             {
                 Console.WriteLine("---------------------------PRODUTOS DO PEDIDO--------------------------------");
                 foreach (var produto in listaProdutos)
@@ -176,19 +178,60 @@ namespace ExercicioLoja
 
         public static void ValorTotalDoPedido(Cliente cliente)
         {
-            ListaProdutosPedido(cliente.PegarPedido());
-            Console.WriteLine("O Valor todal do seu pedido é: {0}", cliente.PegarValorTotalPedido());
-            Console.WriteLine("-----------------------------------------------------------------------------");
-            MenuCliente(cliente);
+            if (cliente.PegarPedido() != null)
+            {
+                ListaProdutosPedido(cliente.PegarPedido());
+                Console.WriteLine("O Valor todal do seu pedido é: {0}", cliente.PegarValorTotalPedido());
+                Console.WriteLine("-----------------------------------------------------------------------------");
+                MenuCliente(cliente);
+            }
+            else
+            {
+                Console.WriteLine("Não há produtos selecionados!");
+                Console.WriteLine("-----------------------------------------------------------------------------");
+                MenuCliente(cliente);
+            }
+            
         }
 
         static void FecharPedido(Cliente cliente)
         {
-            cliente.FecharPedido();
-                           
+            Console.WriteLine("-------------------------------PEDIDO VASIO!!--------------------------------");
 
-            MenuCliente(cliente);
+            //ListaProdutosPedido(cliente.PegarPedido());
+            ValorTotalDoPedido(cliente);
+            Console.WriteLine("-----------------------------------------------------------------------------");
+
+            var produtoCarrinho = cliente.PegarPedido().QuantidadeDeProdutos;
+            if (produtoCarrinho > 0)
+            {
+                Console.WriteLine("------------------------VENDA REALIZADA COM SUCESSO!!------------------------");
+                cliente.FecharPedido();
+                Console.WriteLine("-----------------------------------------------------------------------------");
+                MenuCliente(cliente);
+            }
+            else
+            {
+                MenuCliente(cliente);
+            }
+                
+        }
+
+        static void ConsultarPedidosCliente(Cliente cliente)
+        {
+            Console.WriteLine("----------------------------TODAS AS SUAS COMPRAS--------------------------------");
+            PedidoDAO pedidoDAO = new PedidoDAO(session);
+            var pedidosDoCliente = pedidoDAO.BuscaPorCliente(cliente);
+
+            if (cliente.PegarPedido() != null)
+            {
+                foreach (var item in pedidosDoCliente)
+                {
+                    Console.WriteLine("{0}\t{1}\t{2}",item.Id, item.QuantidadeDeProdutos, item.ValorTotal);
+                }
+            }
             
+
         }
     }
 }

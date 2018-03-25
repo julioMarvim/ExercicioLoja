@@ -54,9 +54,7 @@ namespace ExercicioLoja
                 ValorTotalDoPedido(cliente);
             else if (opcao == "4")
                 FecharPedido(cliente);
-            else if (opcao == "5")
-                ConsultarPedidosCliente(cliente);
-            else
+            
                 Console.WriteLine("Obrigado por acessar a nossa loja virtual");
         }
 
@@ -196,42 +194,12 @@ namespace ExercicioLoja
 
         static void FecharPedido(Cliente cliente)
         {
-            Console.WriteLine("-------------------------------PEDIDO VASIO!!--------------------------------");
-
-            //ListaProdutosPedido(cliente.PegarPedido());
-            ValorTotalDoPedido(cliente);
+            ListaProdutosPedido(cliente.PegarPedido());
+            Console.WriteLine("O Valor todal do seu pedido é: {0}", cliente.PegarValorTotalPedido());
             Console.WriteLine("-----------------------------------------------------------------------------");
 
-            var produtoCarrinho = cliente.PegarPedido().QuantidadeDeProdutos;
-            if (produtoCarrinho > 0)
-            {
-                Console.WriteLine("------------------------VENDA REALIZADA COM SUCESSO!!------------------------");
-                cliente.FecharPedido();
-                Console.WriteLine("-----------------------------------------------------------------------------");
-                MenuCliente(cliente);
-            }
-            else
-            {
-                MenuCliente(cliente);
-            }
-                
-        }
-
-        static void ConsultarPedidosCliente(Cliente cliente)
-        {
-            Console.WriteLine("----------------------------TODAS AS SUAS COMPRAS--------------------------------");
-            PedidoDAO pedidoDAO = new PedidoDAO(session);
-            var pedidosDoCliente = pedidoDAO.BuscaPorCliente(cliente);
-
-            if (cliente.PegarPedido() != null)
-            {
-                foreach (var item in pedidosDoCliente)
-                {
-                    Console.WriteLine("{0}\t{1}\t{2}",item.Id, item.QuantidadeDeProdutos, item.ValorTotal);
-                }
-            }
-            
-
+            cliente.FecharPedido();
+            MenuCliente(cliente);    
         }
     }
 }

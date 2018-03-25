@@ -16,10 +16,10 @@ namespace ExercicioLoja
         {
             ISession session = NHibernateHelper.AbreSession();
 
-            FornecedorDAO fornecedorDAO = new FornecedorDAO(session);
-            ClienteDAO clienteDAO = new ClienteDAO(session);
-            CategoriaDAO categoriaDAO = new CategoriaDAO(session);
-            ProdutoDAO produtoDAO = new ProdutoDAO(session);
+            //FornecedorDAO fornecedorDAO = new FornecedorDAO(session);
+            //ClienteDAO clienteDAO = new ClienteDAO(session);
+            //CategoriaDAO categoriaDAO = new CategoriaDAO(session);
+            //ProdutoDAO produtoDAO = new ProdutoDAO(session);
 
             //NHibernateHelper.GeraSchema();
             //fornecedorDAO.Adiciona("Ibanez Guitar", "(31)99876-5432", "Rua da Guitarra - 1000", "99.999.999/9999-99");

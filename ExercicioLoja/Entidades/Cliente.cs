@@ -113,13 +113,12 @@ namespace ExercicioLoja.Entidades
             if (this.Pedido != null && Pedido.QuantidadeDeProdutos > 0)
             {
                 ISession session = NHibernateHelper.AbreSession();
-                PedidoDAO pedidoDAO = new PedidoDAO(session);
-                Cliente cliente = new Cliente();
-                pedidoDAO.Adiciona(Pedido.DataDoPedido, Pedido.QuantidadeDeProdutos, Pedido.ValorTotal, Pedido.Produtos, this);
+                PedidoDAO pedidoDAO = new PedidoDAO(session);  
+                pedidoDAO.Adiciona(Pedido.DataDoPedido, this.Pedido.QuantidadeDeProdutos, this.Pedido.ValorTotal, (List<Produto>)Pedido.Produtos, this);
 
-                session.Close();
-                
+                session.Close();                
                 this.Pedido.Produtos.Clear();
+                Console.WriteLine("VENDA REALIZADA COM SUCESSO!!");
             }
             else
             {

@@ -43,27 +43,5 @@ namespace ExercicioLoja.DAO
             return session.Get<Pedido>(id);
         }
 
-        public IList<Pedido> BuscaPorCliente(Cliente cliente)
-        {
-
-            Pedido pedido = new Pedido();
-            ICriteria criteria = session.CreateCriteria<Pedido>();
-            if (pedido.Cliente == cliente)
-            {
-                criteria.Add(Restrictions.Eq("Cliente", cliente));
-            }
-            var pedidos = criteria.List<Pedido>();
-            return pedidos;
-
-            //else
-            //    return null;
-            //
-
-            //if (pedidos.Count() > 0)
-            //    return pedidos.ToList();
-            //else
-            //    return null;
-        }
-
     }
 }
